@@ -170,6 +170,18 @@ function init() {
       if (data.newEmployee === true) {
         choosingMember();
       } else {
+        endProgram();
+      }
+    });
+  }
+
+  // ENDING FUNCTION
+  function endProgram() {
+    fs.writeFile(outputPath, render(team), function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Your team is complete!");
       }
     });
   }

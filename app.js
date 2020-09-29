@@ -113,69 +113,99 @@ function init() {
   choosingMember();
   // FUNCTION FOR PICKING MEMBERS
   function choosingMember() {
-    inquirer.prompt(memberPick).then((data) => {
-      console.log(data);
-      if (data.whichMember === "Manager") {
-        manager();
-        // console.log("manager clicked");
-      } else if (data.whichMember === "Engineer") {
-        engineer();
-      } else if (data.whichMember === "Intern") {
-        intern();
-      }
-    });
+    inquirer
+      .prompt(memberPick)
+      .then((data) => {
+        console.log(data);
+        if (data.whichMember === "Manager") {
+          manager();
+          // console.log("manager clicked");
+        } else if (data.whichMember === "Engineer") {
+          engineer();
+        } else if (data.whichMember === "Intern") {
+          intern();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   // FUNCTION FOR MANAGER QUESTION PROMPTS
   function manager() {
-    inquirer.prompt(managerQues).then((data) => {
-      const newManager = new Manager(
-        data.name,
-        data.id,
-        data.email,
-        data.officeNumber
-      );
-      team.push(newManager);
-      console.log(newManager);
-      addMember();
-    });
+    inquirer
+      .prompt(managerQues)
+      .then((data) => {
+        const newManager = new Manager(
+          data.name,
+          data.id,
+          data.email,
+          data.officeNumber
+        );
+        team.push(newManager);
+        console.log(newManager);
+        addMember();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   // FUNCTION FOR ENGINEER QUESTION PROMPTS
   function engineer() {
-    inquirer.prompt(engineerQues).then((data) => {
-      const newEngineer = new Engineer(
-        data.name,
-        data.id,
-        data.email,
-        data.github
-      );
-      team.push(newEngineer);
-      console.log(newEngineer);
-      addMember();
-    });
+    inquirer
+      .prompt(engineerQues)
+      .then((data) => {
+        const newEngineer = new Engineer(
+          data.name,
+          data.id,
+          data.email,
+          data.github
+        );
+        team.push(newEngineer);
+        console.log(newEngineer);
+        addMember();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   // FUNCTION FOR INTERN QUESTION PROMPTS
   function intern() {
-    inquirer.prompt(internQues).then((data) => {
-      const newIntern = new Intern(data.name, data.id, data.email, data.school);
-      team.push(newIntern);
-      console.log(newIntern);
-      addMember();
-    });
+    inquirer
+      .prompt(internQues)
+      .then((data) => {
+        const newIntern = new Intern(
+          data.name,
+          data.id,
+          data.email,
+          data.school
+        );
+        team.push(newIntern);
+        console.log(newIntern);
+        addMember();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   // FUNCTION FOR ADDING NEW MEMBER
   function addMember() {
-    inquirer.prompt(addNewMember).then((data) => {
-      console.log(data);
-      if (data.newEmployee === true) {
-        choosingMember();
-      } else {
-        endProgram();
-      }
-    });
+    inquirer
+      .prompt(addNewMember)
+      .then((data) => {
+        console.log(data);
+        if (data.newEmployee === true) {
+          choosingMember();
+        } else {
+          endProgram();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   // ENDING FUNCTION

@@ -32,7 +32,7 @@ const addNewMember = [
   {
     type: "confirm",
     message: "Would you like to add another employee to the team?",
-    name: "addNewMember",
+    name: "newEmployee",
   },
 ];
 
@@ -163,12 +163,17 @@ function init() {
     });
   }
 
+  // FUNCTION FOR ADDING NEW MEMBER
   function addMember() {
-    inquirer.prompt(addNewMemberQues).then((data) => {});
+    inquirer.prompt(addNewMember).then((data) => {
+      console.log(data);
+      if (data.newEmployee === true) {
+        choosingMember();
+      } else {
+      }
+    });
   }
 }
-
-// FUNCTION FOR ADDING NEW MEMBER
 
 // FUNCTION FOR EMPLOYEE MEMBERS
 

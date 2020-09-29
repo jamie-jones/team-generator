@@ -154,15 +154,6 @@ function init() {
     });
   }
 
-  function intern() {
-    inquirer.prompt(internQues).then((data) => {
-      const newIntern = new Intern(data.name, data.id, data.email, data.school);
-      team.push(newIntern);
-      console.log(newIntern);
-      addMember();
-    });
-  }
-
   function addMember() {
     inquirer.prompt(addNewMemberQues).then((data) => {});
   }

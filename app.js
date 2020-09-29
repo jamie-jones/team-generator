@@ -9,19 +9,170 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const { prompt } = require("inquirer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-const member = [];
+// MEMBERS THAT ARE WRITTEN
+const team = [];
 
-const starterQuestions = [
+// WHICH MEMBER QUESTIONS
+const memberPick = [
   {
-    type: "confirm",
-    message: "Would you like to add a team member?",
-    name: "starterQues",
+    type: "list",
+    message: "Which type of employee would you like to add?",
+    name: "whichMember",
+    choices: ["Manager", "Engineer", "Intern"],
   },
 ];
+
+// ADD ANOTHER MEMBER QUESTION
+const addNewMember = [
+  {
+    type: "confirm",
+    message: "Would you like to add another employee to the team?",
+    name: "addNewMember",
+  },
+];
+
+// MANAGER QUESTIONS
+const managerQues = [
+  {
+    type: "input",
+    message: "What is your manager's name?",
+    name: "name",
+  },
+  {
+    type: "input",
+    message: "What is your manager's ID number?",
+    name: "id",
+  },
+  {
+    type: "input",
+    message: "What is your manager's email?",
+    name: "email",
+  },
+  {
+    type: "input",
+    message: "What is your manager's office number?",
+    name: "officeNumber",
+  },
+];
+
+// ENGINEER QUESTIONS
+const engineerQues = [
+  {
+    type: "input",
+    message: "What is your engineer's name?",
+    name: "name",
+  },
+  {
+    type: "input",
+    message: "What is your engineer's ID number?",
+    name: "id",
+  },
+  {
+    type: "input",
+    message: "What is your engineer's email?",
+    name: "email",
+  },
+  {
+    type: "input",
+    message: "What is your engineer's GitHub username?",
+    name: "github",
+  },
+];
+
+// INTERN QUESTIONS
+const internQues = [
+  {
+    type: "input",
+    message: "What is your intern's Name?",
+    name: "name",
+  },
+  {
+    type: "input",
+    message: "What is your intern's ID number?",
+    name: "id",
+  },
+  {
+    type: "input",
+    message: "What is your intern's email?",
+    name: "email",
+  },
+  {
+    type: "input",
+    message: "What school does your intern go to?",
+    name: "school",
+  },
+];
+
+// FUNCTION FOR STARTER QUESTIONS
+function init() {
+  choosingMember();
+  // FUNCTION FOR PICKING MEMBERS
+  function choosingMember() {
+    inquirer.prompt(memberPick).then((data) => {
+      console.log(data);
+      if (data.whichMember === "Manager") {
+        manager();
+        // console.log("manager clicked");
+      } else if (data.whichMember === "Engineer") {
+        engineer();
+      } else if (data.whichMember === "Intern") {
+        intern();
+      }
+    });
+  }
+
+  function manager() {
+    inquirer.prompt(managerQues).then((data) => {
+      const newManager = new Manager(
+        data.name,
+        data.id,
+        data.email,
+        data.officeNumber
+      );
+      team.push(newManager);
+      console.log(newManager);
+      addMember();
+    });
+  }
+
+  function engineer() {
+    inquirer.prompt(engineerQues).then((data) => {
+      const newEngineer = new Engineer(
+        data.name,
+        data.id,
+        data.email,
+        data.github
+      );
+      team.push(newEngineer);
+      console.log(newEngineer);
+      addMember();
+    });
+  }
+
+  function intern() {
+    inquirer.prompt(internQues).then((data) => {
+      const newIntern = new Intern(data.name, data.id, data.email, data.school);
+      team.push(newIntern);
+      console.log(newIntern);
+      addMember();
+    });
+  }
+
+  function addMember() {
+    inquirer.prompt(addNewMemberQues).then((data) => {});
+  }
+}
+
+// FUNCTION FOR ADDING NEW MEMBER
+
+// FUNCTION FOR EMPLOYEE MEMBERS
+
+init();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will

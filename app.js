@@ -126,6 +126,7 @@ function init() {
     });
   }
 
+  // FUNCTION FOR MANAGER QUESTION PROMPTS
   function manager() {
     inquirer.prompt(managerQues).then((data) => {
       const newManager = new Manager(
@@ -140,6 +141,7 @@ function init() {
     });
   }
 
+  // FUNCTION FOR ENGINEER QUESTION PROMPTS
   function engineer() {
     inquirer.prompt(engineerQues).then((data) => {
       const newEngineer = new Engineer(
@@ -154,6 +156,7 @@ function init() {
     });
   }
 
+  // FUNCTION FOR INTERN QUESTION PROMPTS
   function intern() {
     inquirer.prompt(internQues).then((data) => {
       const newIntern = new Intern(data.name, data.id, data.email, data.school);
